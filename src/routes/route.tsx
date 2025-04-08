@@ -2,6 +2,7 @@
 import Login from '@/components/auth/Login'
 import Mainlayout from '@/layout/Mainlayout'
 import Home from '@/pages/Home'
+import Tasks from '@/pages/Tasks'
 import {createBrowserRouter}  from 'react-router'
 
  const routes = createBrowserRouter([
@@ -12,6 +13,10 @@ import {createBrowserRouter}  from 'react-router'
             {
                 index: true,
                 element: <Home/>
+            },
+            {
+                path: 'tasks',
+                element: <Tasks/>
             }
         ]
     },
