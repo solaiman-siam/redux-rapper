@@ -10,12 +10,20 @@ interface IInitialState {
 const initialState : IInitialState = {
     tasks: [
         {
-            id: 'adasfsdfj',
-            title: 'slkjasd',
-            description: 'lkasdffj',
+            id: 'asdfsdff',
+            title: 'Title of Bangladesh',
+            description: 'Here is the total details with most beautiful',
+            dueDate: '21-25-2021',
+            isComplete: true,
+            priority: 'High'
+        },
+        {
+            id: 'jasdfsdf',
+            title: 'Title of Pakistan',
+            description: 'Hilarious moment of bangladesh and historic',
             dueDate: '21-25-2021',
             isComplete: false,
-            priority: 'High'
+            priority: 'Low'
         },
     ],
     filter: 'all'
