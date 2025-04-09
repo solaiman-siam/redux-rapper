@@ -1,3 +1,4 @@
+import { AddTaslDoalog } from "@/components/module/task/AddTaskDialog";
 import TaskCard from "@/components/module/task/TaskCard";
 import { selectTask } from "@/redux/features/task/taskSlice";
 import { useAppSelector } from "@/redux/hooks"
@@ -12,7 +13,11 @@ function Tasks() {
 
   return (
     <div className="max-w-[1220px] mx-auto">
+      <div className="flex justify-between items-center pb-4">
       <h3 className="pb-4">Tasks</h3>
+      <AddTaslDoalog/>
+      </div>
+    
       <div className="space-y-4">
         {
           tasks.map(task => (
