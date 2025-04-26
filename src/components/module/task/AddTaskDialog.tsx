@@ -53,7 +53,6 @@ export function AddTaslDoalog() {
               </FormItem>
             )}
           />
-
           <DialogFooter className="pt-4">
             <Button type="submit">Save changes</Button>
           </DialogFooter>
