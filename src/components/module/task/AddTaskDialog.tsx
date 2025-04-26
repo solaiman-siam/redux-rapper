@@ -20,7 +20,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import {
   Select,
   SelectContent,
@@ -44,6 +44,7 @@ import {
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { useAppDispatch } from "@/redux/hooks";
 import { addTask } from "@/redux/features/task/taskSlice";
+import { ITask } from "@/types";
 
 export const PopoverPortal = PopoverPrimitive.Portal;
 
@@ -52,8 +53,8 @@ function AddTaskDialog() {
 
   const dispatch = useAppDispatch()
 
-  const onSubmit = (data: FormData) => {
-    dispatch(addTask(data))
+  const onSubmit : SubmitHandler<FieldValues> = (data) => {
+    dispatch(addTask(data as ITask))
     form.reset()
     
   };
@@ -103,9 +104,9 @@ function AddTaskDialog() {
                       <SelectContent>
                         <SelectGroup>
                           <SelectLabel>Fruits</SelectLabel>
-                          <SelectItem value="low">Low</SelectItem>
-                          <SelectItem value="medium">Medium</SelectItem>
-                          <SelectItem value="hight">High</SelectItem>
+                          <SelectItem value="Low">Low</SelectItem>
+                          <SelectItem value="Medium">Medium</SelectItem>
+                          <SelectItem value="Hight">High</SelectItem>
                         </SelectGroup>
                       </SelectContent>
                     </Select>

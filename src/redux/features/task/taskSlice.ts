@@ -1,58 +1,56 @@
 import { RootState } from "@/redux/store";
 import { ITask } from "@/types";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
+import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
 interface IInitialState {
-    tasks: ITask[],
-    filter: 'all' | 'hight' | 'medium' | 'low'
+  tasks: ITask[];
+  filter: "all" | "hight" | "medium" | "low";
 }
 
-const initialState : IInitialState = {
-    tasks: [
-        {
-            id: 'asdfsdff',
-            title: 'Title of Bangladesh',
-            description: 'Here is the total details with most beautiful',
-            dueDate: '21-25-2021',
-            isComplete: true,
-            priority: 'High'
-        },
-        {
-            id: 'jasdfsdf',
-            title: 'Title of Pakistan',
-            description: 'Hilarious moment of bangladesh and historic',
-            dueDate: '21-25-2021',
-            isComplete: false,
-            priority: 'Low'
-        },
-    ],
-    filter: 'all'
-}
+const initialState: IInitialState = {
+  tasks: [
+    {
+      id: "rjP3LTgs9nCPTvWFs9hWD",
+      isComplete: false,
+      title: "sdfsdf",
+      priority: "Medium",
+      description: "asdfsdf",
+      dueDate: "2025-04-22T18:00:00.000Z",
+    },
+  ],
+  filter: "all",
+};
 
+type DraftTask = Pick<ITask, "description" | "dueDate" | "priority" | "title">;
 
-
+const createTask = (taskData: DraftTask): ITask => {
+  return {
+    id: nanoid(),
+    isComplete: false,
+    ...taskData,
+  };
+};
 
 const taskSlice = createSlice({
-    name: 'task',
-    initialState,
-    reducers: {
-        addTask: (state, action : PayloadAction<ITask>) => {
+  name: "task",
+  initialState,
+  reducers: {
+    addTask: (state, action: PayloadAction<ITask>) => {
+      const taskData = createTask(action.payload);
+      state.tasks.push(taskData);
+    },
+    deleteTask: (state) => {
+      state.tasks.pop();
+    },
+  },
+});
+export const selectTask = (state: RootState) => {
+  return state.todo.tasks;
+};
 
-            state.tasks.push(action.payload)
-        },
-        deleteTask: (state) => {
-            state.tasks.pop()
-        }
-    }
-})
-export const selectTask = ((state : RootState) =>{
-    return state.todo.tasks
-})
+export const selectFilter = (state: RootState) => {
+  return state.todo.filter;
+};
 
-export const selectFilter = ((state : RootState) => {
-    return state.todo.filter
-})
+export const { addTask, deleteTask } = taskSlice.actions;
 
-export const {addTask, deleteTask} = taskSlice.actions
-
-export default taskSlice.reducer
+export default taskSlice.reducer;
