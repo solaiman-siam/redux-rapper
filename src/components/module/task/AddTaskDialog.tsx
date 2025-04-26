@@ -76,6 +76,24 @@ function AddTaskDialog() {
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
+<<<<<<< HEAD
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+          <FormField
+            control={form.control}
+            name="title"
+            render={({field}) => (
+              <FormItem  >
+                <FormLabel />
+                <FormControl>
+                    <Input {...field} value={field.value || ''}/>
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <DialogFooter className="pt-4">
+            <Button type="submit">Save changes</Button>
+          </DialogFooter>
+=======
           <form className="space-y-3" onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
@@ -181,6 +199,7 @@ function AddTaskDialog() {
                 Save changes
               </Button>
             </DialogFooter>
+>>>>>>> 88a2f3b1aecd17dba30aea318734cb201f28f716
           </form>
         </Form>
       </DialogContent>

@@ -2,8 +2,8 @@ import { RootState } from "@/redux/store";
 import { ITask } from "@/types";
 import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
 interface IInitialState {
-  tasks: ITask[];
-  filter: "all" | "hight" | "medium" | "low";
+    tasks: ITask[],
+    filter: 'all' | 'hight' | 'medium' | 'low'
 }
 
 const initialState: IInitialState = {
