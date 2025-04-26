@@ -41,21 +41,29 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import * as PopoverPrimitive from "@radix-ui/react-popover"
+import * as PopoverPrimitive from "@radix-ui/react-popover";
+import { useAppDispatch } from "@/redux/hooks";
+import { addTask } from "@/redux/features/task/taskSlice";
 
-export const PopoverPortal = PopoverPrimitive.Portal
+export const PopoverPortal = PopoverPrimitive.Portal;
 
 function AddTaskDialog() {
   const form = useForm();
 
+  const dispatch = useAppDispatch()
+
   const onSubmit = (data: FormData) => {
-    console.log(data);
+    dispatch(addTask(data))
+    form.reset()
+    
   };
 
   const [date, setDate] = React.useState<Date>();
 
+  console.log(date);
+
   return (
-    <Dialog>
+    <Dialog modal={false}>
       <DialogTrigger asChild>
         <Button variant="outline">Add Task</Button>
       </DialogTrigger>
@@ -143,25 +151,21 @@ function AddTaskDialog() {
                         </Button>
                       </FormControl>
                     </PopoverTrigger>
-                    <PopoverPortal>
-                      <PopoverContent
-                        className="w-auto z-[1000] p-0"
-                        align="start"
-                        onOpenAutoFocus={(e) => e.preventDefault()}
-                        onCloseAutoFocus={(e) => e.preventDefault()} // 👈 add this line too
-                        forceMount // 👈 force the popover to mount properly inside dialog
-                      >
-                        <Calendar
-                          mode="single"
-                          selected={field.value}
-                          onSelect={field.onChange}
-                          disabled={(date) =>
-                            date > new Date() || date < new Date("1900-01-01")
-                          }
-                          initialFocus
-                        />
-                      </PopoverContent>
-                    </PopoverPortal>
+                    <PopoverContent
+                      className="w-auto z-[1000] p-0"
+                      align="start"
+                 
+                    >
+                      <Calendar
+                        mode="single"
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        disabled={(date) =>
+                          date > new Date() || date < new Date("1900-01-01")
+                        }
+                        initialFocus
+                      />
+                    </PopoverContent>
                   </Popover>
 
                   <FormDescription className={"sr-only"}>
