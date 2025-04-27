@@ -20,7 +20,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import {
   Select,
   SelectContent,
@@ -41,21 +41,30 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import * as PopoverPrimitive from "@radix-ui/react-popover"
+import * as PopoverPrimitive from "@radix-ui/react-popover";
+import { useAppDispatch } from "@/redux/hooks";
+import { addTask } from "@/redux/features/task/taskSlice";
+import { ITask } from "@/types";
 
-export const PopoverPortal = PopoverPrimitive.Portal
+export const PopoverPortal = PopoverPrimitive.Portal;
 
 function AddTaskDialog() {
   const form = useForm();
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
+  const dispatch = useAppDispatch()
+
+  const onSubmit : SubmitHandler<FieldValues> = (data) => {
+    dispatch(addTask(data as ITask))
+    form.reset()
+    
   };
 
   const [date, setDate] = React.useState<Date>();
 
+  console.log(date);
+
   return (
-    <Dialog>
+    <Dialog modal={false}>
       <DialogTrigger asChild>
         <Button variant="outline">Add Task</Button>
       </DialogTrigger>
@@ -95,9 +104,9 @@ function AddTaskDialog() {
                       <SelectContent>
                         <SelectGroup>
                           <SelectLabel>Fruits</SelectLabel>
-                          <SelectItem value="low">Low</SelectItem>
-                          <SelectItem value="medium">Medium</SelectItem>
-                          <SelectItem value="hight">High</SelectItem>
+                          <SelectItem value="Low">Low</SelectItem>
+                          <SelectItem value="Medium">Medium</SelectItem>
+                          <SelectItem value="Hight">High</SelectItem>
                         </SelectGroup>
                       </SelectContent>
                     </Select>
@@ -124,7 +133,6 @@ function AddTaskDialog() {
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>Due Date</FormLabel>
-
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
@@ -144,25 +152,21 @@ function AddTaskDialog() {
                         </Button>
                       </FormControl>
                     </PopoverTrigger>
-                    <PopoverPortal>
-                      <PopoverContent
-                        className="w-auto z-[1000] p-0"
-                        align="start"
-                        onOpenAutoFocus={(e) => e.preventDefault()}
-                        onCloseAutoFocus={(e) => e.preventDefault()} // 👈 add this line too
-                        forceMount // 👈 force the popover to mount properly inside dialog
-                      >
-                        <Calendar
-                          mode="single"
-                          selected={field.value}
-                          onSelect={field.onChange}
-                          disabled={(date) =>
-                            date > new Date() || date < new Date("1900-01-01")
-                          }
-                          initialFocus
-                        />
-                      </PopoverContent>
-                    </PopoverPortal>
+                    <PopoverContent
+                      className="w-auto z-[1000] p-0"
+                      align="start"
+                 
+                    >
+                      <Calendar
+                        mode="single"
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        disabled={(date) =>
+                          date > new Date() || date < new Date("1900-01-01")
+                        }
+                        initialFocus
+                      />
+                    </PopoverContent>
                   </Popover>
 
                   <FormDescription className={"sr-only"}>
