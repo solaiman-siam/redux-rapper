@@ -15,7 +15,7 @@ function Tasks() {
   return (
     <div className="max-w-[1220px] mx-auto">
       <div className="flex justify-between items-center pb-4">
-      <h3 className="pb-4">Tasks</h3>
+      <h3 className="pb-4 text-lg font-semibold">Tasks</h3>
       <AddTaskDialog/>
       </div>
     

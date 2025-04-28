@@ -8,3 +8,8 @@ export interface ITask {
     isComplete: boolean;
     priority: 'Low' | 'Medium' | 'High';
   }
+
+export interface IUser {
+  id: string, 
+  name: string
+}
