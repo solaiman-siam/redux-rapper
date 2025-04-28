@@ -19,8 +19,6 @@ import { Input } from "@/components/ui/input";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import * as React from "react";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
-import { useAppDispatch } from "@/redux/hooks";
-import { addUser } from "@/redux/features/user/userSlice";
 
 export const PopoverPortal = PopoverPrimitive.Portal;
 
@@ -28,11 +26,9 @@ function AddUserDialog() {
   const [open, setOpen] = React.useState(false)
   const form = useForm();
 
-  const dispatch = useAppDispatch()
 
   const onSubmit : SubmitHandler<FieldValues> = (data) => {
     setOpen(false)
-    dispatch(addUser(data))
     form.reset()
     
   };

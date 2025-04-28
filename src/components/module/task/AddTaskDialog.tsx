@@ -42,19 +42,14 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
-import { useAppDispatch } from "@/redux/hooks";
-import { addTask } from "@/redux/features/task/taskSlice";
-import { ITask } from "@/types";
 
 export const PopoverPortal = PopoverPrimitive.Portal;
 
 function AddTaskDialog() {
   const form = useForm();
 
-  const dispatch = useAppDispatch()
 
   const onSubmit : SubmitHandler<FieldValues> = (data) => {
-    dispatch(addTask(data as ITask))
     form.reset()
     
   };

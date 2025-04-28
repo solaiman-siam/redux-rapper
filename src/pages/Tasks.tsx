@@ -1,14 +1,9 @@
 
 import AddTaskDialog from "@/components/module/task/AddTaskDialog";
-import TaskCard from "@/components/module/task/TaskCard";
-import { selectTask } from "@/redux/features/task/taskSlice";
-import { useAppSelector } from "@/redux/hooks"
 
 function Tasks() {
 
 
-    const tasks = useAppSelector(selectTask);
-    // const filter = useAppSelector(selectFilter)/
 
 
 
@@ -20,11 +15,7 @@ function Tasks() {
       </div>
     
       <div className="space-y-4">
-        {
-          tasks.map(task => (
-            <TaskCard tasks={task} key={task.id}/>
-          ))
-        }
+        
       </div>
     </div>
   )

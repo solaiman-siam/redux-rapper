@@ -1,7 +1,5 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
-import { deleteTask } from "@/redux/features/task/taskSlice";
-import { useAppDispatch } from "@/redux/hooks";
 import { ITask } from "@/types";
 import { Trash2 } from "lucide-react";
 
@@ -11,7 +9,6 @@ interface IProps {
 
 function TaskCard({tasks} : IProps) {
 
-  const dispatch = useAppDispatch()
 
 
   return (
@@ -27,8 +24,8 @@ function TaskCard({tasks} : IProps) {
         <h4 className="text-lg font-medium">{tasks.title}</h4>
       </div>
       <div className="flex items-center gap-2">
-        <span onClick={() => dispatch(deleteTask())} className="cursor-pointer"><Trash2 size={20} color="red" /></span>
-       <Checkbox defaultValue={tasks.isComplete} className="size-5"/> 
+        <span  className="cursor-pointer"><Trash2 size={20} color="red" /></span>
+       <Checkbox  className="size-5"/> 
       </div>
       </div>
       <div className="pt-4 ">
