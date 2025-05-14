@@ -42,14 +42,26 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
+import { useCreateTaskMutation } from "@/redux/api/baseApi";
 
 export const PopoverPortal = PopoverPrimitive.Portal;
 
 function AddTaskDialog() {
+
+
+  const [createTask, {isError, isLoading, data}] = useCreateTaskMutation()
+
   const form = useForm();
 
 
-  const onSubmit : SubmitHandler<FieldValues> = (data) => {
+  const onSubmit : SubmitHandler<FieldValues> = async(data) => {
+
+    const taskData = {...data, isComplete: false}
+
+    const res = await createTask(taskData).unwrap()
+
+    console.log(res);
+
     form.reset()
     
   };

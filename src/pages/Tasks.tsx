@@ -1,9 +1,13 @@
 
 import AddTaskDialog from "@/components/module/task/AddTaskDialog";
+import { useGetTaskQuery } from "@/redux/api/baseApi";
 
 function Tasks() {
 
 
+  const {isError, isLoading, data} = useGetTaskQuery(undefined)
+
+  console.log({data, isError, isLoading});
 
 
 
